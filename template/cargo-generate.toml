@@ -1,7 +1,0 @@
-[template]
-exclude = [ 
-  "justfile",
-  "d-template/src/bin/part1.rs",
-  "d-template/src/bin/part2.rs",
-  "d-template/Cargo.toml"
-]
