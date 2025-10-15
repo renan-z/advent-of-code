@@ -14,4 +14,4 @@ lint day:
   cargo clippy -p day-{{ day }}
 
 test day part:
-    cargo nextest run -p day-{{ day }} {{part}}
+  cargo nextest run -p day-{{ day }} part{{part}}

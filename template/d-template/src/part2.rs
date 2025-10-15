@@ -1,5 +1,5 @@
 pub fn process(input: &str) -> String {
-    println!("Input 1: {}", input);
+    println!("Input 2: {}", input);
     "Hello".to_string()
 }
 #[cfg(test)]
