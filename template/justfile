@@ -15,3 +15,6 @@ lint day:
 
 test day part:
   cargo nextest run -p day-{{ day }} part{{part}}
+
+solve day part:
+  cargo run -p day-{{day}} --bin part{{part}} --release
