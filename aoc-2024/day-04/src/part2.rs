@@ -1,10 +1,5 @@
 use regex::Regex;
 
-fn find_xmas(input: &str) -> u32 {
-    let re = Regex::new(r"XMAS").unwrap();
-    re.find_iter(input).count() as u32
-}
-
 fn find_a(line: &str) -> Vec<usize> {
     let re = Regex::new(r"A").unwrap();
     re.find_iter(line).map(|m| m.start()).collect()
@@ -75,23 +70,24 @@ pub fn process(input: &str) -> String {
     let a_position = data
         .iter()
         .enumerate()
-        .map(|(l, s)| {
+        .flat_map(|(l, s)| {
             find_a(s)
                 .iter()
                 .map(|i| (l, *i))
                 .collect::<Vec<(usize, usize)>>()
         })
-        .flatten()
         .collect::<Vec<(usize, usize)>>();
-    println!("{:?}", a_position);
-    let checkpoints = a_position.iter().for_each(|a_point| {
-        find_checkpoint(a_point, len).iter().for_each(|c| {
-            println!("{:?} {:?}", a_point, c);
-            println!("{}", check_xmas(c, &data));
-        })
+    // println!("{:?}", a_position);
+    let result = a_position.iter().fold(0u32, |acc, a_point| {
+        find_checkpoint(a_point, len)
+            .iter()
+            .filter(|c| {
+                // println!("{:?} {:?}", a_point, c);
+                check_xmas(c, &data)
+            })
+            .count() as u32
+            + acc
     });
-    // println!("{:?}", checkpoints);
-    let result = data.iter().map(|line| find_xmas(line)).sum::<u32>();
 
     result.to_string()
 }
